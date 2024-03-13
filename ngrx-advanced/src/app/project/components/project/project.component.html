@@ -1,0 +1,38 @@
+<button (click)="OnCreateProject()">CreateProject</button>
+<div *ngIf="project$ | async; let model">
+  <table>
+    <thead>
+      <td>Edit</td>
+      <td>Id</td>
+      <td>Name</td>
+      <td>CreatedBy</td>
+      <td>CreatedDate</td>
+      <td>UpdatedBy</td>
+      <td>UpdatedDate</td>
+      <td>IsActive</td>
+      <td>Hard Delete</td>
+      <td>Soft Delete</td>
+    </thead>
+    <tr *ngFor="let item of model">
+      <td>
+        <button
+          [disabled]="!item.IsActive"
+          (click)="OnUpdateProject(item.Id, item.Name)"
+        >
+          Edit
+        </button>
+      </td>
+      <td>{{ item.Id }}</td>
+      <td>{{ item.Name }}</td>
+      <td>{{ item.CreatedBy }}</td>
+      <td>{{ item.CreatedDate | date }}</td>
+      <td>{{ item.UpdatedBy }}</td>
+      <td>{{ item.UpdatedDate | date }}</td>
+      <td>{{ item.IsActive }}</td>
+      <td><button (click)="OnDeleteProject(item.Id)">Hard Delete</button></td>
+      <td>
+        <button (click)="OnSoftDeleteProject(item.Id)">Soft Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
